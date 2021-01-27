@@ -191,7 +191,7 @@ namespace Davicom
                 switch (pictureBox.Tag.ToString())
                 {
                     case "pacecar_inactiva":
-                        data[0] = 1;
+                        data[0] = (byte) (circuitoActivo == 5? 254 : circuitoActivo);
                         data[1] = 1;
                         _port.Write(data, 0, data.Length);
                         pacecar.Image = Properties.Resources.pacecar_activa;
@@ -199,7 +199,7 @@ namespace Davicom
                         NewMethod("pacecar_activa", 1);
                         break;
                     case "pacecar_activa":
-                        data[0] = 1;
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo); ;
                         data[1] = 6;
                         _port.Write(data, 0, data.Length);
                         pacecar.Image = Properties.Resources.pacecar_inactiva;
@@ -208,7 +208,7 @@ namespace Davicom
                         break;
 
                     case "rojas-inactiva":
-                        data[0] = 1;
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
                         data[1] = 4;
                         _port.Write(data, 0, data.Length);
                         rojas.Image = Properties.Resources.rojas_activa;
@@ -218,7 +218,7 @@ namespace Davicom
                         break;
 
                     case "rojas_activa":
-                        data[0] = 1;
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
                         data[1] = 6;
                         _port.Write(data, 0, data.Length);
                         rojas.Image = Properties.Resources.rojas_inactiva;
@@ -227,7 +227,7 @@ namespace Davicom
 
                         break;
                     case "verde-inactiva":
-                        data[0] = 1;
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
                         data[1] = 5;
                         _port.Write(data, 0, data.Length);
                         verdes.Image = Properties.Resources.verde_activa;
@@ -237,7 +237,7 @@ namespace Davicom
                         break;
 
                     case "verde_activa":
-                        data[0] = 1;
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
                         data[1] = 6;
                         _port.Write(data, 0, data.Length);
                         verdes.Image = Properties.Resources.verde_inactiva;
@@ -246,7 +246,7 @@ namespace Davicom
 
                         break;
                     case "amarillo-inactiva":
-                        data[0] = 1;
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
                         data[1] = 2;
                         _port.Write(data, 0, data.Length);
                         amarillas.Image = Properties.Resources.amarillo_activa;
@@ -256,7 +256,7 @@ namespace Davicom
                         break;
 
                     case "amarillo_activa":
-                        data[0] = 1;
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
                         data[1] = 6;
                         _port.Write(data, 0, data.Length);
                         amarillas.Image = Properties.Resources.amarillo_inactiva;
@@ -266,7 +266,7 @@ namespace Davicom
                         break;
 
                     case "azul-inactiva":
-                        data[0] = 1;
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
                         data[1] = 3;
                         _port.Write(data, 0, data.Length);
                         azules.Image = Properties.Resources.azul_activa;
@@ -276,7 +276,7 @@ namespace Davicom
                         break;
 
                     case "azul_activa":
-                        data[0] = 1;
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
                         data[1] = 6;
                         _port.Write(data, 0, data.Length);
                         azules.Image = Properties.Resources.azul_inactiva;
@@ -314,17 +314,25 @@ namespace Davicom
         }
         private void BanderaNegra()
         {
+            byte[] data = new byte[2];
+
             var circuitoActual3 = circuitos.ElementAt(circuitoActivo - 1).Split(',');
             foreach (var item in circuitoActual3)
             {
                 switch (item)
                 {
                     case "pacecar_activa":
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
+                        data[1] = 6;
+                        _port.Write(data, 0, data.Length);
                         pacecar.Image = Properties.Resources.pacecar_inactiva;
                         pacecar.Tag = "pacecar_inactiva";
                         NewMethod("pacecar_inactiva", 1);
                         break;
                     case "rojas_activa":
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
+                        data[1] = 6;
+                        _port.Write(data, 0, data.Length);
                         rojas.Image = Properties.Resources.rojas_inactiva;
                         rojas.Tag = "rojas-inactiva";
                         NewMethod("rojas-inactiva", 2);
@@ -332,12 +340,18 @@ namespace Davicom
                         break;
 
                     case "verde_activa":
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
+                        data[1] = 6;
+                        _port.Write(data, 0, data.Length);
                         verdes.Image = Properties.Resources.verde_inactiva;
                         verdes.Tag = "verde-inactiva";
                         NewMethod("verde-inactiva", 3);
 
                         break;
                     case "amarillo_activa":
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
+                        data[1] = 6;
+                        _port.Write(data, 0, data.Length);
                         amarillas.Image = Properties.Resources.amarillo_inactiva;
                         amarillas.Tag = "amarillo-inactiva";
                         NewMethod("amarillo-inactiva", 4);
@@ -345,6 +359,9 @@ namespace Davicom
                         break;
 
                     case "azul_activa":
+                        data[0] = (byte)(circuitoActivo == 5 ? 254 : circuitoActivo);
+                        data[1] = 6;
+                        _port.Write(data, 0, data.Length);
                         azules.Image = Properties.Resources.azul_inactiva;
                         azules.Tag = "azul-inactiva";
                         NewMethod("azul-inactiva", 5);
