@@ -89,6 +89,7 @@ namespace Davicom
                     btnCircuito3.Style = MetroColorStyle.White;
                     btnCircuito4.Style = MetroColorStyle.White;
                     btnAll.Style = MetroColorStyle.Red;
+                    circuitoActuales();
                     break;
                 default:
                     break;
